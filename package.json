@@ -1,0 +1,27 @@
+{
+  "name": "kruncuy-pos",
+  "private": true,
+  "version": "1.0.0",
+  "description": "KRUNCUY POS & ERP — Multi-outlet F&B System",
+  "scripts": {
+    "dev:api": "npm run dev --workspace=backend",
+    "dev:web": "npm run dev --workspace=frontend",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "build": "npm run build --workspace=frontend",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{js,jsx,json,css}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,json,css}\"",
+    "db:migrate": "npm run prisma:migrate --workspace=backend",
+    "db:push": "npm run prisma:db-push --workspace=backend",
+    "db:seed": "node backend/prisma/seed.js",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "backup": "pwsh -File scripts/backup.ps1"
+  },
+  "workspaces": ["backend", "frontend"],
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "prettier": "^3.8.4"
+  }
+}

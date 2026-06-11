@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx prisma *)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"ya\" npx prisma *)",
+      "Bash(node prisma/seed.js)",
+      "Bash(timeout 8 node src/server.js)",
+      "Bash(npx vite *)",
+      "Bash(node *)",
+      "Bash(xargs grep -L \"requireAuth\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :5000)",
+      "Bash(findstr LISTENING)",
+      "Bash(taskkill *)",
+      "PowerShell(taskkill *)",
+      "Bash(npm run *)",
+      "Bash(timeout 15 powershell -Command \"Get-Content -Path 'C:\\\\Users\\\\GERARD~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\F--kakak-kruncuy-pos\\\\83fbf9d3-14ab-41ce-a76a-628dbb3ebd61\\\\tasks\\\\b6c92dt3h.output' -Tail 20 -Wait\")",
+      "PowerShell([Environment]::SetEnvironmentVariable\\(\"CLAUDE_CODE_EFFORT_LEVEL\", \"low\", \"User\"\\); Write-Host \"User-level set to: $\\([Environment]::GetEnvironmentVariable\\('CLAUDE_CODE_EFFORT_LEVEL', 'User'\\)\\)\")",
+      "PowerShell([Environment]::GetEnvironmentVariable\\(\"CLAUDE_CODE_EFFORT_LEVEL\", \"User\"\\))",
+      "PowerShell([Environment]::GetEnvironmentVariable\\(\"CLAUDE_CODE_EFFORT_LEVEL\", \"Process\"\\))",
+      "PowerShell($env:CLAUDE_CODE_EFFORT_LEVEL = \"low\"; [Environment]::SetEnvironmentVariable\\(\"CLAUDE_CODE_EFFORT_LEVEL\", \"low\", \"User\"\\); Write-Host \"Process: $env:CLAUDE_CODE_EFFORT_LEVEL\"; Write-Host \"User: $\\([Environment]::GetEnvironmentVariable\\('CLAUDE_CODE_EFFORT_LEVEL', 'User'\\)\\)\")",
+      "PowerShell(Write-Host \"Machine: $\\([Environment]::GetEnvironmentVariable\\('CLAUDE_CODE_EFFORT_LEVEL', 'Machine'\\)\\)\"; Write-Host \"User: $\\([Environment]::GetEnvironmentVariable\\('CLAUDE_CODE_EFFORT_LEVEL', 'User'\\)\\)\"; Write-Host \"Process: $\\([Environment]::GetEnvironmentVariable\\('CLAUDE_CODE_EFFORT_LEVEL', 'Process'\\)\\)\")"
+    ]
+  }
+}

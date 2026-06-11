@@ -1,0 +1,57 @@
+# Render Blueprint — Infrastructure as Code
+# Deploy backend API + cron job untuk keep alive
+# Dashboard: https://dashboard.render.com
+
+services:
+  # ─── Backend API ───
+  - type: web
+    name: kruncuy-pos-api
+    runtime: node
+    repo: https://github.com/your-username/kruncuy-pos
+    branch: main
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npx prisma migrate deploy && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kruncuy-pos-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: "7d"
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: kruncuy-pos-frontend
+          property: host
+      - key: VOID_THRESHOLD
+        value: "100000"
+
+  # ─── Keep Alive (cron-job.org alternatif) ───
+  - type: cron
+    name: kruncuy-pos-keep-alive
+    runtime: node
+    schedule: "*/10 * * * *"   # every 10 minutes
+    buildCommand: ""
+    startCommand: node -e "fetch(process.env.API_URL + '/api/health').then(r => console.log('pong', r.status)).catch(e => console.log('miss'))"
+    envVars:
+      - key: API_URL
+        fromService:
+          type: web
+          name: kruncuy-pos-api
+          property: host
+
+databases:
+  # ─── PostgreSQL Database ───
+  - name: kruncuy-pos-db
+    region: singapore
+    plan: free
+    databaseName: kruncuy
+    ipAllowList: []  # allow all (secured by PostgreSQL auth)

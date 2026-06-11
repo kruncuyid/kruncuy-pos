@@ -1,0 +1,399 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+
+  --color-text: #111827;
+  --color-text-secondary: #475569;
+  --color-muted: #64748b;
+  --color-border: #e5e7eb;
+  --color-border-light: #f1f5f9;
+
+  --color-primary: #d71920;
+  --color-primary-hover: #b9151b;
+  --color-primary-soft: #fee2e2;
+  --color-primary-ring: rgba(215, 25, 32, 0.25);
+
+  --color-warning: #f59e0b;
+  --color-warning-soft: #fef3c7;
+  --color-success: #16a34a;
+  --color-success-soft: #dcfce7;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fee2e2;
+  --color-info: #2563eb;
+  --color-info-soft: #dbeafe;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
+
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --shadow-dropdown: 0 8px 24px rgba(15, 23, 42, 0.1);
+}
+
+html.dark {
+  --color-bg: #0f172a;
+  --color-surface: #111827;
+  --color-surface-2: #1e293b;
+
+  --color-text: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-muted: #94a3b8;
+  --color-border: #334155;
+  --color-border-light: #1e293b;
+
+  --color-primary: #ef4444;
+  --color-primary-hover: #dc2626;
+  --color-primary-soft: #450a0a;
+  --color-primary-ring: rgba(239, 68, 68, 0.3);
+
+  --color-warning: #fbbf24;
+  --color-warning-soft: #451a03;
+  --color-success: #22c55e;
+  --color-success-soft: #052e16;
+  --color-danger: #ef4444;
+  --color-danger-soft: #450a0a;
+  --color-info: #3b82f6;
+  --color-info-soft: #1e3a5f;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-card-hover: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ── Core utility classes ── */
+
+.kr-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease;
+  min-width: 0;
+}
+
+.kr-card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.kr-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kr-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-ring);
+}
+
+.kr-input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+select.kr-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+/* ── Scrollbar ── */
+
+.erp-scrollbar-hidden {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.erp-scrollbar-hidden::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.erp-scrollbar-hidden::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.erp-scrollbar-hidden::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* ── Sticky header glass effect ── */
+
+.erp-page-content > header:first-child {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 20;
+  isolation: isolate;
+  overflow: hidden;
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  border-color: rgba(148, 163, 184, 0.16);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.erp-page-content > header:first-child::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: inherit;
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+}
+
+.erp-page-content > header:first-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+.erp-page-content {
+  position: relative;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.erp-page-content::before {
+  content: "";
+  position: sticky;
+  top: 0;
+  z-index: 19;
+  display: block;
+  height: 0.9rem;
+  margin-bottom: -0.9rem;
+  pointer-events: none;
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.85) 0%,
+    rgba(248, 250, 252, 0.55) 60%,
+    rgba(248, 250, 252, 0) 100%
+  );
+}
+
+html.dark .erp-page-content::before {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(15, 23, 42, 0.55) 60%,
+    rgba(15, 23, 42, 0) 100%
+  );
+}
+
+html.dark .erp-page-content > header:first-child {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.74) 0%, rgba(15, 23, 42, 0.66) 100%);
+}
+
+html:not(.dark) .erp-page-content > header:first-child {
+  background: rgba(255, 255, 255, 0.70);
+}
+
+/* ── Responsive ERP page tweaks ── */
+
+@media (max-width: 639px) {
+  .erp-page-content > header:first-child h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+  .erp-page-content > header:first-child {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+  .erp-page-content .kr-card.p-6,
+  .erp-page-content .kr-card.p-5 {
+    padding: 1rem !important;
+  }
+}
+
+/* ── Responsive filter forms ── */
+@media (max-width: 639px) {
+  .erp-page-content form.grid.gap-3 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Animations ── */
+
+@keyframes erp-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-6px);
+  }
+  30% {
+    transform: translateX(6px);
+  }
+  45% {
+    transform: translateX(-4px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  90% {
+    transform: translateX(2px);
+  }
+}
+
+.erp-shake {
+  animation: erp-shake 0.35s ease-in-out;
+}
+
+@keyframes erp-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.erp-fade-in {
+  animation: erp-fade-in 0.2s ease-out;
+}
+
+@keyframes erp-skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.erp-skeleton {
+  background: linear-gradient(90deg, var(--color-surface-2) 25%, var(--color-border) 50%, var(--color-surface-2) 75%);
+  background-size: 200% 100%;
+  animation: erp-skeleton 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Page section spacing ── */
+
+.erp-section {
+  animation: erp-fade-in 0.2s ease-out;
+}
+
+/* ── Selected text ── */
+
+::selection {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+/* ── Print receipt styles ── */
+
+.receipt-print-only {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receipt-print-only,
+  .receipt-print-only * {
+    visibility: visible;
+  }
+  .receipt-print-only {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+  .receipt-content {
+    max-width: 280px;
+    margin: 0 auto;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #000;
+    text-align: center;
+  }
+  .receipt-content h2 {
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .receipt-invoice {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .receipt-content hr {
+    border: none;
+    border-top: 1px dashed #333;
+    margin: 8px 0;
+  }
+  .receipt-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+  .receipt-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 900;
+  }
+  .receipt-thanks {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #555;
+  }
+}

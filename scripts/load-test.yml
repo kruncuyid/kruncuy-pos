@@ -1,0 +1,60 @@
+# KRUNCUY POS — Load Test (k6)
+# Usage: k6 run scripts/load-test.yml
+# Install: https://k6.io/docs/get-started/installation/
+
+http:
+  # Endpoint: POS Checkout
+  - name: POS Checkout
+    url: http://localhost:5000/api/pos/checkout
+    method: POST
+    headers:
+      Content-Type: application/json
+      Authorization: "Bearer {{ token }}"
+    body: |
+      {
+        "items": [{"productId": "{{ productId }}", "qty": 1, "price": 5000}],
+        "totalAmount": 5000,
+        "paymentMethod": "CASH"
+      }
+    thresholds:
+      - "http_req_duration{name:POS Checkout}:p(95)<2000"
+      - "http_req_failed{name:POS Checkout}:rate<0.01"
+
+  # Endpoint: List Transactions
+  - name: List Transactions
+    url: http://localhost:5000/api/transactions?page=1&limit=20
+    method: GET
+    headers:
+      Authorization: "Bearer {{ token }}"
+    thresholds:
+      - "http_req_duration{name:List Transactions}:p(95)<1000"
+      - "http_req_failed{name:List Transactions}:rate<0.01"
+
+  # Endpoint: Get Catalog
+  - name: Get POS Catalog
+    url: http://localhost:5000/api/pos/catalog?channel=OFFLINE
+    method: GET
+    headers:
+      Authorization: "Bearer {{ token }}"
+    thresholds:
+      - "http_req_duration{name:Get POS Catalog}:p(95)<500"
+
+  # Endpoint: Cross Branch Dashboard
+  - name: Cross Branch Dashboard
+    url: http://localhost:5000/api/erp/cross-branch
+    method: GET
+    headers:
+      Authorization: "Bearer {{ token }}"
+    thresholds:
+      - "http_req_duration:p(95)<1000"
+
+options:
+  stages:
+    - duration: 1m
+      target: 10    # Ramp up to 10 users
+    - duration: 2m
+      target: 50    # Ramp up to 50 users
+    - duration: 2m
+      target: 100   # Ramp up to 100 users
+    - duration: 1m
+      target: 0     # Ramp down

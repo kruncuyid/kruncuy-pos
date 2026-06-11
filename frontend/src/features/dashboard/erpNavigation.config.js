@@ -1,0 +1,143 @@
+import {
+  BarChart3,
+  Boxes,
+  Building2,
+  ClipboardList,
+  Database,
+  DollarSign,
+  FileText,
+  LayoutDashboard,
+  Package,
+  ReceiptText,
+  Settings2,
+  ShieldCheck,
+  ShoppingCart,
+  Store,
+  Trash2,
+  Truck,
+  Users,
+  Wallet,
+  Warehouse,
+  FileSpreadsheet,
+  Gavel,
+  BookOpen,
+  HandCoins,
+  Search,
+  Ship,
+  ClipboardCheck,
+} from "lucide-react";
+
+export const ERP_NAV_GROUPS = [
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    items: [
+      {
+        label: "Overview",
+        href: "/erp",
+        permission: "reports:read",
+      },
+      {
+        label: "Notifikasi",
+        href: "/erp/notifications",
+        permission: "reports:read",
+      },
+    ],
+  },
+  {
+    key: "master-data",
+    label: "Master Data",
+    icon: Database,
+    items: [
+      { label: "Products", href: "/erp/products", permission: "products:read" },
+      { label: "Categories", href: "/erp/product-categories", permission: "product-categories:read" },
+      { label: "Branch Pricing", href: "/erp/branch-products", permission: "branch-products:read" },
+      { label: "Recipes", href: "/erp/menu-recipes", permission: "inventory:read" },
+      { label: "Inventory Items", href: "/erp/inventory", permission: "inventory:read" },
+      { label: "Suppliers", href: "/erp/suppliers", permission: "suppliers:read" },
+      { label: "Supplier Invoices", href: "/erp/supplier-invoices", permission: "purchasing:read" },
+      { label: "Customers", href: "/erp/customers", permission: "master-data:read" },
+      { label: "Branches", href: "/erp/branches", permission: "branches:read" },
+      { label: "Master Data", href: "/erp/master-data", permission: "master-data:read" },
+    ],
+  },
+  {
+    key: "operations",
+    label: "Operations",
+    icon: Store,
+    items: [
+      { label: "Cross Branch", href: "/erp/cross-branch", permission: "reports:read" },
+      { label: "Transactions", href: "/erp/transactions", permission: "transactions:read" },
+      { label: "Sales Overview", href: "/erp/sales", permission: "reports:read" },
+      { label: "Stock Opname", href: "/erp/stock-opname", permission: "inventory:read" },
+      { label: "Inventory Movement", href: "/erp/inventory-movement", permission: "inventory:read" },
+      { label: "Warehouse", href: "/erp/warehouse", permission: "inventory:read" },
+      { label: "Depot Transfer", href: "/erp/depot-transfers", permission: "depot-transfers:read" },
+      { label: "Returns", href: "/erp/returns", permission: "returns:read" },
+      { label: "Waste Management", href: "/erp/waste", permission: "waste:read" },
+      { label: "Shipment Tracking", href: "/erp/shipment-tracking", permission: "inventory:read" },
+      { label: "Branch Orders", href: "/erp/branch-orders", permission: "purchasing:read" },
+      { label: "Operations Log", href: "/erp/operations-log", permission: "reports:read" },
+    ],
+  },
+  {
+    key: "purchasing",
+    label: "Purchasing",
+    icon: ShoppingCart,
+    items: [
+      { label: "Purchasing Overview", href: "/erp/purchasing", permission: "purchasing:read" },
+      { label: "Purchase Request", href: "/erp/purchase-requests", permission: "purchasing-request:read" },
+      { label: "Purchase Order", href: "/erp/purchase-orders", permission: "purchasing-order:read" },
+      { label: "Goods Receipt", href: "/erp/goods-receipts", permission: "goods-receipt:read" },
+      { label: "Outlet Expenses", href: "/erp/outlet-expenses", permission: "purchasing:read" },
+      { label: "Purchasing Queue", href: "/erp/purchasing-queue", permission: "purchasing:read" },
+    ],
+  },
+  {
+    key: "finance",
+    label: "Finance",
+    icon: Wallet,
+    items: [
+      { label: "Cash Sessions", href: "/erp/cash-sessions", permission: "cash-sessions:read" },
+      { label: "Cash Withdrawals", href: "/erp/cash-withdrawals", permission: "cash-withdrawals:read" },
+      { label: "Cash Control", href: "/erp/cash-control", permission: "cash-sessions:read" },
+      { label: "Payroll", href: "/erp/payroll", permission: "payroll:read" },
+    ],
+  },
+  {
+    key: "hr",
+    label: "HR",
+    icon: Users,
+    items: [
+      { label: "Users", href: "/erp/users", permission: "users:read" },
+      { label: "Branch Assignments", href: "/erp/branch-assignments", permission: "branch-assignments:read" },
+      { label: "Attendance", href: "/erp/attendance", permission: "cash-sessions:read" },
+      { label: "Performance", href: "/erp/performance", permission: "reports:read" },
+    ],
+  },
+  {
+    key: "reports",
+    label: "Reports",
+    icon: FileSpreadsheet,
+    items: [
+      { label: "Reports Center", href: "/erp/reports", permission: "reports:read" },
+    ],
+  },
+  {
+    key: "system",
+    label: "System",
+    icon: Settings2,
+    items: [
+      { label: "Access Control", href: "/erp/access-control", permission: "access-control:read" },
+      { label: "Settings", href: "/erp/settings", permission: "settings:read" },
+      { label: "Audit Logs", href: "/erp/audit-logs", permission: "audit-logs:read" },
+      { label: "Reference", href: "/erp/reference", permission: "master-data:read" },
+      { label: "Compliance", href: "/erp/compliance", permission: "audit-logs:read" },
+    ],
+  },
+];
+
+export function getAllErpNavItems() {
+  return ERP_NAV_GROUPS.flatMap((group) => group.items.map((item) => ({ ...item, groupKey: group.key })));
+}
