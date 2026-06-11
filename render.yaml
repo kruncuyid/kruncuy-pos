@@ -1,9 +1,9 @@
-# Render Blueprint — Backend API
 services:
   - type: web
     name: kruncuy-pos-api
     runtime: node
     repo: https://github.com/kruncuyid/kruncuy-pos
+    plan: free
     branch: main
     rootDir: backend
     buildCommand: npm install && npx prisma generate
@@ -12,15 +12,7 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: "5000"
-      - key: DATABASE_URL
-        sync: false
       - key: JWT_SECRET
         generateValue: true
-      - key: JWT_EXPIRES_IN
-        value: 7d
       - key: FRONTEND_URL
         value: https://frontend-ten-dun-20.vercel.app
-      - key: VOID_THRESHOLD
-        value: "100000"
